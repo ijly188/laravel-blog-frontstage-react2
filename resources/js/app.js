@@ -4,7 +4,7 @@
  * building robust, powerful web applications using React + Laravel.
  */
 
-require('./bootstrap');
+// require('./bootstrap');
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -12,5 +12,24 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/Example');
-require('./components/app');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import IndexWrap from './components/IndexWrap';
+import rootReducer from './reducers';
+
+// const store = createStore(rootReducer);
+
+const store = createStore(
+  rootReducer, /* preloadedState, */
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+// DOM element
+ReactDOM.render(
+  <Provider store={store}>
+    <IndexWrap />
+  </Provider>,
+  document.getElementById('app')
+);
